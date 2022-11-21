@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../../components/head') %>
+<body>
+    <h1>Todo List</h1>
+    <form action="/" method="POST">
+        <input type="text" id="todo" name="todo">
+        <button type="submit">Add</button>
+    </form>
+    <ul>
+        <% for(let todo of todos) { %>
+            <li><%= todo.value %> <a href="remove/<%= todo._id %>">Delete </a> </li>
+            <% }%>
+    </ul>  
+</body>
+</html>

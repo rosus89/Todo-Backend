@@ -9,7 +9,7 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json())
-
+app.use(express.static('public'));
 
 const PORT = 8081;
 
@@ -44,13 +44,17 @@ app.route('/remove/:id').get((req, res) => {
     
 })
 
-app.post((req, res) => {
-    const id = req.params.id;
-    TodoTask.findByIdAndUpdate(id, { content: req.body.content }, err => {
-    if (err) return res.send(500, err);
-    res.redirect("/");
-    })
+app.route('/edit/:id').get((req, res) => {
+    Todo.find({}, (err, todo) => {
+    res.render("todos/edit", { todos: todo, id: req.params.id })})})
+    .post((req, res) => {
+    Todo.findByIdAndUpdate(req.params.id, { value: req.body.content }, err => {
+        if (err) return res.send(500, err);
+        res.redirect("/");
+        });
 })
+
+
 
 app.use( (req, res, next)=>{
     let err = new Error("Page not found!")

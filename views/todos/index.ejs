@@ -9,8 +9,9 @@
     </form>
     <ul>
         <% for(let todo of todos) { %>
-            <li><%= todo.value %> <a href="remove/<%= todo._id %>">Delete </a> </li>
+            
+            <li><%= todo.value %> <a href="/edit/<%= todo._id %>" class="edit">Edit</a> <a href="/remove/<%= todo._id %>">Delete </a> </li>
             <% }%>
-    </ul>  
+    </ul>
 </body>
 </html>
